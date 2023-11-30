@@ -18,12 +18,33 @@ def listCharToListInt(listChar: list[str]) -> list[int]:
     return listInt
 
 
-def getWhoEatWhoFromFile(fileName: str) -> list[list[int]]:
+def getWhoEatWhoFromFile(whoEatWho: list[list[int]], fileName: str) -> list[list[int]]:
     with open(fileName, "r") as file:
-        whoEatWho = []
         nbAnimals = int(file.readline())
         file.readline()
         for i in range(nbAnimals):
             whoEatWho.append(listCharToListInt(file.readline().split()))
         file.close()
         return whoEatWho
+
+
+def getAnimalsEatWho(whoEatWho: list[list[int]], animalsIndex: dict, indexAnimals: dict) -> dict:
+    animalsEatWho = {}
+    for animalIndex in animalsIndex.values():
+        animalsEaten = []
+        for index, value in enumerate(whoEatWho[animalIndex]):
+            if value == 1:
+                animalsEaten.append(indexAnimals[index])
+        animalsEatWho[indexAnimals[animalIndex]] = animalsEaten
+    return animalsEatWho
+
+
+def getAnimalsEatenByWho(whoEatWho: list[list[int]], animalsIndex: dict, indexAnimals: dict) -> dict:
+    animalsEatWho = {}
+    for animalIndex in animalsIndex.values():
+        animalsEaten = []
+        for index, value in enumerate(whoEatWho[animalIndex]):
+            if value == -1:
+                animalsEaten.append(indexAnimals[index])
+        animalsEatWho[indexAnimals[animalIndex]] = animalsEaten
+    return animalsEatWho

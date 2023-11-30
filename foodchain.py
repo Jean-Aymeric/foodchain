@@ -1,14 +1,14 @@
 def getAnimalAndIndexFromFile(fileName: str) -> (dict, dict):
     with open(fileName, "r") as file:
-        animalIndex = {}
-        indexAnimal = {}
+        animalsIndex = {}
+        indexAnimals = {}
         nbAnimals = int(file.readline())
         animalsList = file.readline().split()
         for i in range(nbAnimals):
-            animalIndex[animalsList[i]] = i
-            indexAnimal[i] = animalsList[i]
+            animalsIndex[animalsList[i]] = i
+            indexAnimals[i] = animalsList[i]
         file.close()
-        return animalIndex, indexAnimal
+        return animalsIndex, indexAnimals
 
 
 def listCharToListInt(listChar: list[str]) -> list[int]:
